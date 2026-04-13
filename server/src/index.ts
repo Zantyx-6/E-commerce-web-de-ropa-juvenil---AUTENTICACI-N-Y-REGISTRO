@@ -8,7 +8,8 @@ dotenv.config();
 const app = express();
 const clientOrigin = process.env.CLIENT_ORIGIN || "http://localhost:5173";
 
-app.use(cors({ origin: clientOrigin }));
+// Permitimos cualquier puerto de localhost (5173, 5174, etc.) en desarrollo
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);

@@ -95,6 +95,7 @@ npm run dev
 ```
 
 La aplicación abre en `http://localhost:5173`.
+*(Nota: Si el puerto 5173 está ocupado, Vite abrirá automáticamente en el `5174` u otro superior. El servidor Backend está configurado con CORS dinámico (`origin: true`) para permitir peticiones desde cualquier puerto local originado por Vite sin bloquearte).*
 
 ---
 
