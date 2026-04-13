@@ -38,15 +38,15 @@ export async function register(req: Request, res: Response): Promise<Response> {
       .json({ error: `La contraseña debe tener al menos ${PASSWORD_MIN_LENGTH} caracteres.` });
   }
 
-  // Duplicate email check
-  const existing = await findUserByEmail(email.toLowerCase().trim());
-  if (existing) {
-    return res.status(409).json({
-      error: "Ya existe una cuenta registrada con ese correo. Intenta iniciar sesión.",
-    });
-  }
-
   try {
+    // Duplicate email check
+    const existing = await findUserByEmail(email.toLowerCase().trim());
+    if (existing) {
+      return res.status(409).json({
+        error: "Ya existe una cuenta registrada con ese correo. Intenta iniciar sesión.",
+      });
+    }
+
     const role =
       email.toLowerCase().trim() === ADMIN_EMAIL ? Role.ADMIN : Role.CLIENT;
 
