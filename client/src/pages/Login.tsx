@@ -74,97 +74,102 @@ export default function Login() {
       sideBottom="ELECTRIC EDITORIAL © 2024"
       badge={{ text: "VIBRA SHOP" }}
     >
-      <div className="w-full max-w-[420px]">
-        <h2 className="text-[2rem] font-display font-bold text-slate-800 mb-2 tracking-tight">
-          Bienvenido.
-        </h2>
-        <p className="text-slate-500 text-[0.92rem] mb-7">
-          Ingresa tus credenciales para continuar tu experiencia.
-        </p>
+      <div className="flex flex-col w-full max-w-[420px] h-full justify-center">
+        {/* White Card */}
+        <div className="bg-white rounded-3xl px-8 py-6 shadow-xl w-full">
+          <h2 className="text-[2rem] font-display font-bold text-slate-800 mb-2 tracking-tight">
+            Bienvenido.
+          </h2>
+          <p className="text-slate-500 text-[0.92rem] mb-7">
+            Ingresa tus credenciales para continuar tu experiencia.
+          </p>
 
-        <form
-          onSubmit={(e) =>
-            handleSubmit(e, async () => {
-              const result = await loginRequest({
-                email: email.trim().toLowerCase(),
-                password,
-              });
-              login(result.user);
-            })
-          }
-          noValidate
-        >
-          <AuthInput
-            id="login-email"
-            label="Email"
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-            onBlur={() => handleBlur("email")}
-            placeholder="nombre@ejemplo.com"
-            error={emailError}
-            touched={emailState === "error" || emailState === "success"}
-            icon={emailIcon}
-            autoComplete="username"
-            ariaDescribedBy="login-email-error"
-          />
-
-          <div className="mb-5 relative">
-            <div className="flex justify-between items-center mb-2">
-              <label
-                className="block text-xs font-bold text-slate-600 uppercase tracking-wide"
-                htmlFor="login-password"
-              >
-                Contraseña
-              </label>
-              <Link
-                to="#"
-                className="text-xs font-bold text-blue-500 no-underline uppercase tracking-wide hover:text-blue-700 transition-colors"
-              >
-                ¿Olvidaste tu contraseña?
-              </Link>
-            </div>
-            <AuthInput
-              id="login-password"
-              label=""
-              type="password"
-              value={password}
-              onChange={handlePasswordChange}
-              onBlur={() => handleBlur("password")}
-              placeholder="••••••••"
-              error={passwordError}
-              touched={passwordState === "error" || passwordState === "success"}
-              icon={passwordIcon}
-              showPassword={showPassword}
-              onTogglePassword={() => setShowPassword((v) => !v)}
-              autoComplete="current-password"
-              ariaDescribedBy="login-password-error"
-            />
-          </div>
-
-          <FormMessage type="error" message={serverError || ""} />
-
-          <SubmitButton
-            id="login-submit-btn"
-            disabled={buttonDisabled}
-            isSubmitting={isSubmitting}
-            label="Iniciar sesión"
-          />
-        </form>
-
-        <SocialButtons />
-
-        <div className="mt-5 text-center text-[0.92rem] text-slate-500">
-          ¿Aún no tienes cuenta?{" "}
-          <Link
-            to="/register"
-            className="text-blue-700 font-bold no-underline ml-1 hover:text-blue-900 transition-colors"
+          <form
+            onSubmit={(e) =>
+              handleSubmit(e, async () => {
+                const result = await loginRequest({
+                  email: email.trim().toLowerCase(),
+                  password,
+                });
+                login(result.user);
+              })
+            }
+            noValidate
           >
-            Crear cuenta
-          </Link>
+            <AuthInput
+              id="login-email"
+              label="Email"
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
+              onBlur={() => handleBlur("email")}
+              placeholder="nombre@ejemplo.com"
+              error={emailError}
+              touched={emailState === "error" || emailState === "success"}
+              icon={emailIcon}
+              autoComplete="username"
+              ariaDescribedBy="login-email-error"
+            />
+
+            <div className="mb-5 relative">
+              <div className="flex justify-between items-center mb-2">
+                <label
+                  className="block text-xs font-bold text-slate-600 uppercase tracking-wide"
+                  htmlFor="login-password"
+                >
+                  Contraseña
+                </label>
+                <Link
+                  to="#"
+                  className="text-xs font-bold text-blue-500 no-underline uppercase tracking-wide hover:text-blue-700 transition-colors"
+                >
+                  ¿Olvidaste tu contraseña?
+                </Link>
+              </div>
+              <AuthInput
+                id="login-password"
+                label=""
+                type="password"
+                value={password}
+                onChange={handlePasswordChange}
+                onBlur={() => handleBlur("password")}
+                placeholder="••••••••"
+                error={passwordError}
+                touched={passwordState === "error" || passwordState === "success"}
+                icon={passwordIcon}
+                showPassword={showPassword}
+                onTogglePassword={() => setShowPassword((v) => !v)}
+                autoComplete="current-password"
+                ariaDescribedBy="login-password-error"
+                containerClassName="mb-1 relative"
+              />
+            </div>
+
+            <FormMessage type="error" message={serverError || ""} />
+
+            <SubmitButton
+              id="login-submit-btn"
+              disabled={buttonDisabled}
+              isSubmitting={isSubmitting}
+              label="Iniciar sesión"
+            />
+          </form>
+
+          <SocialButtons />
+
+          <div className="mt-4 text-center text-[0.92rem] text-slate-500">
+            ¿Aún no tienes cuenta?{" "}
+            <Link
+              to="/register"
+              className="text-blue-700 font-bold no-underline ml-1 hover:text-blue-900 transition-colors"
+            >
+              Crear cuenta
+            </Link>
+          </div>
         </div>
 
-        <div className="text-[0.65rem] text-slate-300 font-medium tracking-widest uppercase text-center mt-8">
+        {/* Footer outside the card */}
+        <div className="text-[0.65rem] text-slate-400 font-medium tracking-widest uppercase text-center mt-5 pb-2">
           © 2024 VIBRA SHOP · ELECTRIC EDITORIAL · TODOS LOS DERECHOS RESERVADOS
         </div>
       </div>

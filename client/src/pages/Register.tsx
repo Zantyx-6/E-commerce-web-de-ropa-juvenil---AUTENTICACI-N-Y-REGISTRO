@@ -95,158 +95,166 @@ export default function Register() {
         color: "bg-[#ff8fa3] text-white",
       }}
     >
-      <div className="w-full max-w-[480px] bg-white rounded-3xl px-10 py-6 shadow-[0_20px_60px_rgba(0,0,0,0.05)] max-sm:px-6 max-sm:py-6 max-sm:shadow-none max-sm:rounded-none max-sm:max-w-full">
-        <h2 className="text-[1.7rem] font-display font-bold text-slate-800 mb-1 tracking-tight">
-          Crea tu cuenta
-        </h2>
-        <p className="text-slate-500 text-[0.88rem] mb-5">
-          Introduce tus datos para empezar la experiencia.
-        </p>
+      <div className="flex flex-col w-full max-w-[480px] h-full justify-center">
+        {/* White Card */}
+        <div className="bg-white rounded-3xl px-8 py-5 shadow-xl w-full">
+          <h2 className="text-[1.7rem] font-display font-bold text-slate-800 mb-0.5 tracking-tight">
+            Crea tu cuenta
+          </h2>
+          <p className="text-[0.85rem] text-slate-500 mb-4">
+            Introduce tus datos para empezar la experiencia.
+          </p>
 
-        <form
-          onSubmit={(e) =>
-            handleSubmit(e, async () => {
-              const result = await registerRequest({
-                name: fields.name.trim(),
-                email: fields.email.trim().toLowerCase(),
-                password: fields.password,
-              });
-              setServerMessage(
-                result.message || "¡Cuenta creada exitosamente! Redirigiendo..."
-              );
-              setTimeout(() => (window.location.href = "/login"), 1600);
-            })
-          }
-          noValidate
-        >
-          {/* Nombre */}
-          <AuthInput
-            id="reg-name"
-            label="Nombre Completo"
-            type="text"
-            value={fields.name}
-            onChange={set("name")}
-            onBlur={blur("name")}
-            placeholder="Ej. Alex Rivera"
-            error={errors.nameError}
-            touched={touched.name}
-            icon={nameIcon}
-            autoComplete="name"
-            ariaDescribedBy="reg-name-error"
-          />
-
-          {/* Correo */}
-          <AuthInput
-            id="reg-email"
-            label="Correo Electrónico"
-            type="email"
-            value={fields.email}
-            onChange={set("email")}
-            onBlur={blur("email")}
-            placeholder="hola@vibrashop.com"
-            error={errors.emailError}
-            touched={touched.email}
-            icon={emailIcon}
-            autoComplete="email"
-            ariaDescribedBy="reg-email-error"
-          />
-
-          {/* Contraseña */}
-          <AuthInput
-            id="reg-password"
-            label="Contraseña"
-            type="password"
-            value={fields.password}
-            onChange={set("password")}
-            onBlur={blur("password")}
-            placeholder="••••••••"
-            error={errors.passwordError}
-            touched={touched.password}
-            icon={passwordIcon}
-            showPassword={showPassword}
-            onTogglePassword={() => setShowPassword((v) => !v)}
-            autoComplete="new-password"
-            ariaDescribedBy="reg-password-error"
-          />
-
-          {/* Confirmar Contraseña */}
-          <AuthInput
-            id="reg-confirm-password"
-            label="Confirmar Contraseña"
-            type="password"
-            value={fields.confirmPassword}
-            onChange={set("confirmPassword")}
-            onBlur={blur("confirmPassword")}
-            placeholder="••••••••"
-            error={errors.confirmPasswordError}
-            touched={touched.confirmPassword}
-            icon={confirmIcon}
-            showPassword={showPassword}
-            onTogglePassword={() => setShowPassword((v) => !v)}
-            autoComplete="new-password"
-            ariaDescribedBy="reg-confirm-error"
-          />
-
-          {/* Términos y condiciones */}
-          <label
-            className="flex items-start gap-3 mt-3 mb-4 cursor-pointer"
-            htmlFor="reg-terms"
+          <form
+            onSubmit={(e) =>
+              handleSubmit(e, async () => {
+                const result = await registerRequest({
+                  name: fields.name.trim(),
+                  email: fields.email.trim().toLowerCase(),
+                  password: fields.password,
+                });
+                setServerMessage(
+                  result.message || "¡Cuenta creada exitosamente! Redirigiendo..."
+                );
+                setTimeout(() => (window.location.href = "/login"), 1600);
+              })
+            }
+            noValidate
           >
-            <input
-              id="reg-terms"
-              type="checkbox"
-              checked={fields.acceptedTerms}
-              onChange={set("acceptedTerms")}
-              className="custom-checkbox mt-0.5"
+            {/* Nombre */}
+            <AuthInput
+              id="reg-name"
+              label="Nombre Completo"
+              type="text"
+              value={fields.name}
+              onChange={set("name")}
+              onBlur={blur("name")}
+              placeholder="Ej. Alex Rivera"
+              error={errors.nameError}
+              touched={touched.name}
+              icon={nameIcon}
+              autoComplete="name"
+              ariaDescribedBy="reg-name-error"
+              containerClassName="mb-3 relative"
             />
-            <div className="text-[0.85rem] text-slate-500 leading-relaxed">
-              Acepto los{" "}
-              <span className="text-blue-700 font-semibold">
-                términos y condiciones
-              </span>{" "}
-              y la política de privacidad.
-            </div>
-          </label>
 
-          {errors.termsError && !fields.acceptedTerms && touched.name && (
-            <span
-              className="block text-red-500 text-sm font-medium -mt-3.5 mb-4"
-              role="alert"
+            {/* Correo */}
+            <AuthInput
+              id="reg-email"
+              label="Correo Electrónico"
+              type="email"
+              value={fields.email}
+              onChange={set("email")}
+              onBlur={blur("email")}
+              placeholder="hola@vibrashop.com"
+              error={errors.emailError}
+              touched={touched.email}
+              icon={emailIcon}
+              autoComplete="email"
+              ariaDescribedBy="reg-email-error"
+              containerClassName="mb-3 relative"
+            />
+
+            {/* Contraseña */}
+            <AuthInput
+              id="reg-password"
+              label="Contraseña"
+              type="password"
+              value={fields.password}
+              onChange={set("password")}
+              onBlur={blur("password")}
+              placeholder="••••••••"
+              error={errors.passwordError}
+              touched={touched.password}
+              icon={passwordIcon}
+              showPassword={showPassword}
+              onTogglePassword={() => setShowPassword((v) => !v)}
+              autoComplete="new-password"
+              ariaDescribedBy="reg-password-error"
+              containerClassName="mb-3 relative"
+            />
+
+            {/* Confirmar Contraseña */}
+            <AuthInput
+              id="reg-confirm-password"
+              label="Confirmar Contraseña"
+              type="password"
+              value={fields.confirmPassword}
+              onChange={set("confirmPassword")}
+              onBlur={blur("confirmPassword")}
+              placeholder="••••••••"
+              error={errors.confirmPasswordError}
+              touched={touched.confirmPassword}
+              icon={confirmIcon}
+              showPassword={showPassword}
+              onTogglePassword={() => setShowPassword((v) => !v)}
+              autoComplete="new-password"
+              ariaDescribedBy="reg-confirm-error"
+              containerClassName="mb-3 relative"
+            />
+
+            {/* Términos y condiciones */}
+            <label
+              className="flex items-start gap-2.5 mt-3 mb-4 cursor-pointer"
+              htmlFor="reg-terms"
             >
-              {errors.termsError}
-            </span>
-          )}
+              <input
+                id="reg-terms"
+                type="checkbox"
+                checked={fields.acceptedTerms}
+                onChange={set("acceptedTerms")}
+                className="custom-checkbox mt-0.5"
+              />
+              <div className="text-[0.85rem] text-slate-500 leading-relaxed">
+                Acepto los{" "}
+                <span className="text-blue-600 font-semibold">
+                  términos y condiciones
+                </span>{" "}
+                y la política de privacidad.
+              </div>
+            </label>
 
-          {/* Server Messages */}
-          <FormMessage type="error" message={serverError || ""} />
-          <FormMessage type="success" message={serverMessage || ""} />
+            {errors.termsError && !fields.acceptedTerms && touched.name && (
+              <span
+                className="block text-red-500 text-sm font-medium -mt-4 mb-4"
+                role="alert"
+              >
+                {errors.termsError}
+              </span>
+            )}
 
-          <SubmitButton
-            id="register-submit-btn"
-            disabled={buttonDisabled}
-            isSubmitting={isSubmitting}
-            label="Crear cuenta"
-          />
-        </form>
+            {/* Server Messages */}
+            <FormMessage type="error" message={serverError || ""} />
+            <FormMessage type="success" message={serverMessage || ""} />
 
-        <div className="mt-6 text-center text-[0.95rem] text-slate-500">
-          ¿Ya tienes cuenta?{" "}
-          <Link
-            to="/login"
-            className="text-blue-900 font-bold no-underline ml-1.5"
-          >
-            Inicia sesión
-          </Link>
+            <SubmitButton
+              id="register-submit-btn"
+              disabled={buttonDisabled}
+              isSubmitting={isSubmitting}
+              label="Crear cuenta"
+            />
+          </form>
+
+          <div className="mt-4 text-center text-[0.9rem] text-slate-500">
+            ¿Ya tienes cuenta?{" "}
+            <Link
+              to="/login"
+              className="text-blue-700 font-bold no-underline ml-1"
+            >
+              Inicia sesión
+            </Link>
+          </div>
         </div>
 
-        <div className="flex gap-5 justify-center mt-auto pt-5 text-xs font-bold text-slate-400 uppercase tracking-wide">
-          <Link to="#" className="text-slate-400 no-underline">
+        {/* Footer outside the card */}
+        <div className="flex gap-5 justify-center mt-5 text-[0.65rem] font-bold text-slate-400 uppercase tracking-widest pb-2">
+          <Link to="#" className="text-slate-400 no-underline hover:text-slate-600 transition-colors">
             Soporte
           </Link>
-          <Link to="#" className="text-slate-400 no-underline">
+          <Link to="#" className="text-slate-400 no-underline hover:text-slate-600 transition-colors">
             Privacidad
           </Link>
-          <Link to="#" className="text-slate-400 no-underline">
+          <Link to="#" className="text-slate-400 no-underline hover:text-slate-600 transition-colors">
             Ayuda
           </Link>
         </div>

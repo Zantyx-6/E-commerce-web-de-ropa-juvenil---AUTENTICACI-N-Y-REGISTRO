@@ -15,11 +15,11 @@ interface AuthInputProps {
   onTogglePassword?: () => void;
   autoComplete?: string;
   ariaDescribedBy?: string;
+  containerClassName?: string;
 }
 
-/* ── Base styles ─────────────────────────────────────────────────────────── */
 const inputBase =
-  "w-full bg-slate-100 border-2 border-transparent rounded-xl py-3.5 pr-11 pl-11 text-[0.93rem] text-slate-800 outline-none font-medium transition-all duration-200 placeholder:text-slate-400 placeholder:font-normal " +
+  "w-full bg-slate-100 border-2 border-transparent rounded-xl py-2.5 pr-11 pl-11 text-[0.93rem] text-slate-800 outline-none font-medium transition-all duration-200 placeholder:text-slate-400 placeholder:font-normal " +
   /* Focus ring */
   "focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10";
 
@@ -75,6 +75,7 @@ export default function AuthInput({
   onTogglePassword,
   autoComplete,
   ariaDescribedBy,
+  containerClassName = "mb-5 relative",
 }: AuthInputProps) {
   const state = touched ? (error ? "error" : "success") : "";
 
@@ -92,7 +93,7 @@ export default function AuthInput({
   const showStatusIcon = touched && !isPasswordType;
 
   return (
-    <div className="mb-5 relative">
+    <div className={containerClassName}>
       {label && (
         <label
           className="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wider"
