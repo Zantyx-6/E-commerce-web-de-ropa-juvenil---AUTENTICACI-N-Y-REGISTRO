@@ -3,7 +3,7 @@ import React from "react";
 interface AuthLayoutProps {
   children: React.ReactNode;
   backgroundImage: string;
-  sideTitle: string;
+  sideTitle: React.ReactNode;
   sideSubtitle?: React.ReactNode;
   sideBottom?: React.ReactNode;
   gradient?: string;
