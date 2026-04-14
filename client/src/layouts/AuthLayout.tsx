@@ -23,53 +23,67 @@ export default function AuthLayout({
   badge,
 }: AuthLayoutProps) {
   return (
-    <div className="flex min-h-screen bg-[#f8f9fc] font-sans">
+    <div className="flex min-h-screen w-full font-sans text-slate-800 bg-[#f8f9fc]">
       {/* Left side banner — Desktop only */}
-      <div className="hidden lg:flex relative w-1/2 overflow-hidden bg-black flex-col justify-center p-[60px]">
+      <div className="hidden lg:flex flex-col relative w-1/2 bg-black overflow-hidden p-12 justify-between">
         <img
           src={backgroundImage}
-          className="absolute top-0 left-0 w-full h-full object-cover opacity-90 z-[1]"
+          className="absolute inset-0 w-full h-full object-cover opacity-90 z-[1]"
           alt="Background"
         />
+        {/* Dark gradient overlay for readability at the bottom */}
         <div
-          className="absolute top-0 left-0 w-full h-full z-[2]"
+          className="absolute inset-0 z-[2]"
           style={{
             background:
               gradient ||
-              "linear-gradient(135deg, rgba(30, 20, 100, 0.4), rgba(10, 50, 160, 0.7))",
+              "linear-gradient(to top, rgba(0,20,80,0.8) 0%, rgba(0,0,0,0) 70%)",
           }}
         />
 
-        {badge && (
-          <div
-            className={`inline-block ${
-              badge.color || "bg-white/15 backdrop-blur-xl"
-            } py-2 px-4 rounded-lg mb-8 font-display italic font-extrabold tracking-wide z-[3]`}
-          >
-            {badge.text}
+        {/* Top left content */}
+        <div className="relative z-[3] flex items-center justify-between font-display">
+          <div className="text-white font-black italic tracking-widest text-2xl">
+            VIBRA SHOP
           </div>
-        )}
+        </div>
 
-        <div className="relative z-[3] text-white my-auto">
-          <h1 className="font-display text-[4.5rem] font-extrabold leading-[1.05] m-0 mb-6 drop-shadow-lg">
+        {/* Bottom left content */}
+        <div className="relative z-[3] flex flex-col mt-auto text-white">
+          {/* Badge */}
+          {badge && (
+            <div
+              className={`self-start inline-flex items-center ${
+                badge.color || "bg-white/20 backdrop-blur-xl text-white"
+              } py-1.5 px-3 rounded-full mb-4 font-bold tracking-wider text-[0.7rem] uppercase`}
+            >
+              {badge.text}
+            </div>
+          )}
+
+          {/* Title */}
+          <h1 className="font-display text-[4.5rem] font-extrabold leading-[1.05] m-0 mb-4 drop-shadow-lg">
             {sideTitle}
           </h1>
+
+          {/* Subtitle */}
           {sideSubtitle && (
-            <p className="text-lg leading-relaxed max-w-[450px] opacity-95 drop-shadow-md">
+            <p className="text-[1.05rem] leading-relaxed text-white/90 max-w-[400px] drop-shadow-md m-0 mb-4">
               {sideSubtitle}
             </p>
           )}
-        </div>
 
-        {sideBottom && (
-          <div className="absolute bottom-10 left-[60px] text-[0.7rem] text-white/50 font-medium tracking-wide uppercase z-[3]">
-            {sideBottom}
-          </div>
-        )}
+          {/* Bottom text */}
+          {sideBottom && (
+            <div className="text-[0.65rem] text-white/50 font-medium tracking-widest uppercase mt-4">
+              {sideBottom}
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Right side */}
-      <div className="w-full lg:w-1/2 flex flex-col items-center justify-center px-5 py-10 relative">
+      {/* Right side — form area */}
+      <div className="flex-1 flex flex-col relative items-center justify-center p-4 lg:p-6 overflow-y-auto">
         {children}
       </div>
     </div>
