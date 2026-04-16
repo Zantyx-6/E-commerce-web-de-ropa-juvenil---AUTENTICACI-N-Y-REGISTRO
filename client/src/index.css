@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  body, html, #root {
+    @apply m-0 p-0 h-full w-full;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+/* Custom checkbox checked state - not possible with pure Tailwind */
+@layer components {
+  .custom-checkbox {
+    @apply appearance-none w-5 h-5 rounded-md bg-violet-100 border-[1.5px] border-transparent cursor-pointer relative flex-shrink-0 mt-0.5;
+  }
+
+  .custom-checkbox:checked {
+    @apply bg-indigo-500;
+  }
+
+  .custom-checkbox:checked::after {
+    content: '✓';
+    @apply absolute text-white text-[13px] font-bold top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+}
