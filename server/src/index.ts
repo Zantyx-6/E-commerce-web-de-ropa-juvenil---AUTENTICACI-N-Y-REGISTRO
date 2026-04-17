@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth";
+import productRoutes from "./routes/products";
+import categoryRoutes from "./routes/categories";
 import {
   logger,
   errorHandler,
@@ -28,6 +30,8 @@ app.use(rateLimiter(100, 60000));
 // ==================== RUTAS ====================
 
 app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/categories", categoryRoutes);
 
 app.get("/api/health", (_req: Request, res: Response) => {
   res.json({ status: "ok", message: "Authentication API is running" });
@@ -40,7 +44,7 @@ app.use(errorHandler);
 
 // ==================== SERVIDOR ====================
 
-const port = Number(process.env.PORT) || 4000;
+const port = Number(process.env.PORT) || 3000;
 app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}`);
 });
