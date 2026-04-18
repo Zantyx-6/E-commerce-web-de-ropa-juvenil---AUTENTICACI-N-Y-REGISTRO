@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 import { useAuth } from "../hooks";
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 
 export default function MainStoreLayout({ children }: Props) {
   const { user, logout } = useAuth();
+  const { totalItems } = useCart();
   const navigate = useNavigate();
 
   return (
@@ -28,6 +30,9 @@ export default function MainStoreLayout({ children }: Props) {
               >
                 Catálogo
               </Link>
+              <Link className="rounded-md px-3 py-1.5 text-sm hover:bg-slate-100" to="/cart">
+                Carrito
+              </Link>
               {user?.role === "ADMIN" && (
                 <Link
                   className="rounded-md px-3 py-1.5 text-sm hover:bg-slate-100"
@@ -46,6 +51,19 @@ export default function MainStoreLayout({ children }: Props) {
             >
               Comprar
             </button>
+
+            <button
+              onClick={() => navigate("/cart")}
+              className="relative rounded-md border px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
+            >
+              Carrito
+              {totalItems > 0 && (
+                <span className="absolute -right-2 -top-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-rose-600 px-1 text-[11px] font-bold text-white">
+                  {totalItems}
+                </span>
+              )}
+            </button>
+
             <button
               onClick={logout}
               className="rounded-md border px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
